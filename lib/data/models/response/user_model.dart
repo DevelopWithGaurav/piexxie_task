@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:piexxie_task/extensions.dart';
+
 List<UserModel> userModelFromJson(String str) => List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
 
 String userModelToJson(List<UserModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -62,6 +64,11 @@ class UserModel {
         "registerDate": registerDate?.toIso8601String(),
         "updatedDate": updatedDate?.toIso8601String(),
       };
+
+  @override
+  String toString() {
+    return '$title $firstName $lastName'.capitalizeFirstOfEach;
+  }
 }
 
 class Location {

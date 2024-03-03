@@ -87,6 +87,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                               }
                             },
                             child: Material(
+                              color: Colors.transparent,
                               child: SizedBox(
                                 width: double.maxFinite,
                                 child: Text(
@@ -126,6 +127,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                               }
                             },
                             child: Material(
+                              color: Colors.transparent,
                               child: SizedBox(
                                 width: double.maxFinite,
                                 child: Text(
