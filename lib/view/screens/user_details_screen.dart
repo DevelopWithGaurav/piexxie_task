@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -5,6 +6,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:piexxie_task/controllers/user_details_controller.dart';
 import 'package:piexxie_task/extensions.dart';
+import 'package:piexxie_task/extra_methods.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   const UserDetailsScreen({super.key, required this.userID});
@@ -75,13 +77,25 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            child: Text(
-                              'Email: ${userDetailsController.latestUser.email}',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.titleMedium,
+                          GestureDetector(
+                            onTap: () {
+                              if (userDetailsController.latestUser.email.isEmail) {
+                                ExtraMethods().makeMail(userDetailsController.latestUser.email ?? '');
+                              } else {
+                                Fluttertoast.cancel();
+                                Fluttertoast.showToast(msg: 'Invalid Email!!!');
+                              }
+                            },
+                            child: Material(
+                              child: SizedBox(
+                                width: double.maxFinite,
+                                child: Text(
+                                  'Email: ${userDetailsController.latestUser.email}',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -102,13 +116,25 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            child: Text(
-                              'Phone: ${userDetailsController.latestUser.phone}',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.titleMedium,
+                          GestureDetector(
+                            onTap: () {
+                              if (userDetailsController.latestUser.phone.isValid) {
+                                ExtraMethods().makeCall(userDetailsController.latestUser.email ?? '');
+                              } else {
+                                Fluttertoast.cancel();
+                                Fluttertoast.showToast(msg: 'Invalid Number!!!');
+                              }
+                            },
+                            child: Material(
+                              child: SizedBox(
+                                width: double.maxFinite,
+                                child: Text(
+                                  'Phone: ${userDetailsController.latestUser.phone}',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ),
                             ),
                           ),
                         ],
